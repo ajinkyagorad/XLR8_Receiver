@@ -6,23 +6,18 @@
  */ 
 
 #include <avr/io.h>				// definations for registers
-
-
+//default frequency of operation 1M
 void USARTInit(unsigned int ubrr_value, uint8_t x2, uint8_t stopbits) {
 	//from datasheet : 
 	// Set baud rate
 	UBRRL = ubrr_value & 255;
 	UBRRH = ubrr_value >> 8;
-
 	// Frame Format: asynchronous, 8 data bits, no parity, 1/2 stop bits
 	UCSRC = _BV(UCSZ1) | _BV(UCSZ0);
 	if(stopbits == 2) UCSRC |= _BV(USBS);
-
 	if(x2) UCSRA = _BV(U2X); // 2x
-
 	// USART Data Register Empty Interrupt Enable
 	UCSRB = _BV(UDRIE);
-
 	// Enable The receiver and transmitter
 	UCSRB |= _BV(RXEN) | _BV(TXEN);
 }
@@ -35,7 +30,7 @@ int main() {
 	while(1)			//endless loop
 		while( !(UCSRA & (1<<RXC)) );	// wait for data to be received in uart UDR register
 		char temp = UDR;				// copy data, 
-		PORTB  = UDR;					// write data directly to port
+		PORTB  = UDR&(0X0F);					// write data directly to port
 		UDR = temp;						// also loopback the data for livelyness of uC
 	}
 }
