@@ -342,26 +342,26 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000       0xe8
+.debug_info     0x00000000      0x10e
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000       0xe8 XLR8_module.o
+ .debug_info    0x00000000      0x10e XLR8_module.o
 
-.debug_abbrev   0x00000000       0xaf
+.debug_abbrev   0x00000000       0xcb
  *(.debug_abbrev)
- .debug_abbrev  0x00000000       0xaf XLR8_module.o
+ .debug_abbrev  0x00000000       0xcb XLR8_module.o
 
-.debug_line     0x00000000       0xde
+.debug_line     0x00000000       0xe1
  *(.debug_line .debug_line.* .debug_line_end)
- .debug_line    0x00000000       0xde XLR8_module.o
+ .debug_line    0x00000000       0xe1 XLR8_module.o
 
 .debug_frame    0x00000000       0x34
  *(.debug_frame)
  .debug_frame   0x00000000       0x34 XLR8_module.o
 
-.debug_str      0x00000000      0x157
+.debug_str      0x00000000      0x15c
  *(.debug_str)
- .debug_str     0x00000000      0x157 XLR8_module.o
-                                0x18b (size before relaxing)
+ .debug_str     0x00000000      0x15c XLR8_module.o
+                                0x195 (size before relaxing)
 
 .debug_loc      0x00000000       0x26
  *(.debug_loc)

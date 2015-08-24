@@ -29,8 +29,19 @@ int main() {
 	USARTInit(5, 0, 1); // initialise uart to baud rate 9600, no parity , 1 stopbit
 	DDRB=0xFF;			// make all pins on port B as output
 	PORTB  = 0x00;		// initially make all pins low
+	
 	while(1){		//endless loop
 		while( !(UCSRA & (1<<RXC))) ;	// wait for data to be received in uart UDR register
-		PORTB = UDR;
+		char temp = UDR;
+		PORTB = temp;		//directly write value of uart data to port
+		//temp = (temp& 0x0F)  | (( temp<<2)&0	x10);
+		//PORTB = (temp&0x0F)|((temp<<4)&(0x0F));
+		/*if ((temp&0x02)==2)
+		{
+			PORTB = 0xF0|(temp&0x0F);
+		}
+		else {
+			PORTB = temp&0X0F;
+		}*/
 	}
 }
